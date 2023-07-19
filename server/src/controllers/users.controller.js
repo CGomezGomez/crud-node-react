@@ -52,16 +52,18 @@ controller.updateUser = async (req, res) => {
       return res.status(404).send({ error: 'Usuario no encontrado' });
     }
 
-    jsonData[userIndex] = {
+    const updatedUser = {
       userId,
       name,
       age: parseInt(age),
       email,
     };
 
+    jsonData[userIndex] = updatedUser;
+
     await fs.writeFile(usersFile, JSON.stringify(jsonData));
 
-    res.send(jsonData[userIndex]);
+    res.send(updatedUser);
   } catch (err) {
     res.status(500).send({ error: 'Error al actualizar usuario' });
   }
