@@ -1,7 +1,7 @@
 import { useState , useEffect } from "react";
 
 const Print = ({ users, setUsers }) => {
-  const [editedUser, setEditedUser] = useState(null);
+  const [editedUser, setEditedUser] = useState();
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -17,7 +17,7 @@ const Print = ({ users, setUsers }) => {
     fetchUsers();
   }, []);
 
-  const handleDeleteUser = async (userId) => {
+const handleDeleteUser = async (userId) => {
     try {
       const response = await fetch(
         `http://localhost:3000/api/users/${userId}`,
@@ -38,12 +38,12 @@ const Print = ({ users, setUsers }) => {
     }
   };
 
-  const handleEditUser = (userId) => {
+const handleEditUser = (userId) => {
     const userToEdit = users.find((user) => user.userId === userId);
     setEditedUser(userToEdit);
   };
 
-  const handleUpdateUser = async () => {
+const handleUpdateUser = async () => {
     try {
       const response = await fetch(
         `http://localhost:3000/api/users/${editedUser.userId}`,
@@ -71,7 +71,7 @@ const Print = ({ users, setUsers }) => {
     }
   };
 
-  return (
+return (
     <div>
       {users &&
         users.map((user) => (
@@ -86,7 +86,7 @@ const Print = ({ users, setUsers }) => {
               Eliminar
             </button>
           </div>
-        ))}
+        ))} 
       {editedUser && (
         <div>
           <h3>Editar Usuario:</h3>
